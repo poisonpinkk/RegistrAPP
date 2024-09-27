@@ -1,6 +1,53 @@
-<div class="header" [ngClass]="{'iniciando': usuario!=='' }">
-  <h1>RegistrAPP <img src="assets/img/Logo_DuocUC.svg" ></h1>
-  @if (usuario === ''){ <p>Inicie sesión primero</p> }
-  @if (usuario){ <h1>Bienvenido {{usuario}} </h1> }
-</div>
-<!--Modificar segun corresponda si a docente o a alumno-->
+<ion-content>
+  <app-header></app-header>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Asignatura 1</ion-label>
+      @if (usuario === 'profesor'){
+      <ion-button>Generar QR</ion-button>
+      }
+      @if (usuario === 'alumno'){
+      <ion-button>Escanear QR</ion-button>
+      }
+    </ion-item>
+    <ion-item>
+      <ion-label>Asignatura 2</ion-label>
+      @if (usuario === 'profesor'){
+      <ion-button>Generar QR</ion-button>
+      }
+      @if (usuario === 'alumno'){
+      <ion-button>Escanear QR</ion-button>
+      }
+    </ion-item>
+    <ion-item>
+      <ion-label>Asignatura 3</ion-label>
+      @if (usuario === 'profesor'){
+      <ion-button>Generar QR</ion-button>
+      }
+      @if (usuario === 'alumno'){
+      <ion-button>Escanear QR</ion-button>
+      }
+    </ion-item>
+    <ion-item>
+      <ion-label>Asignatura 4</ion-label>
+      @if (usuario === 'profesor'){
+      <ion-button>Generar QR</ion-button>
+      }
+      @if (usuario === 'alumno'){
+      <ion-button>Escanear QR</ion-button>
+      }
+    </ion-item>
+    <ion-item>
+      <ion-label>Asignatura 5</ion-label>
+      @if (usuario === 'profesor'){
+      <ion-button>Generar QR</ion-button>
+      }
+      @if (usuario === 'alumno'){
+      <ion-button>Escanear QR</ion-button>
+      }
+    </ion-item>
+  </ion-list>
+
+  <app-footer></app-footer>
+</ion-content>
