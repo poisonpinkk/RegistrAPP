@@ -1,8 +1,14 @@
-<ion-content>
-  <div>
 
-    <ion-button [routerLink]="['/logout']" > Volver al inicio </ion-button>
-
-  </div>
-</ion-content>
-
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-undo-outline"></ion-icon>
+        Volver
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/logout']">Cerrar Sesión</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

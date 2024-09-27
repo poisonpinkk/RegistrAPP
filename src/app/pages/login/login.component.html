@@ -1,11 +1,7 @@
 <ion-content [fullscreen]="true">
 
   <app-header></app-header>
-
-  <div>
-    <p>Inicie sesión para entrar</p>
-  </div>
-
+    <br><br>
   <form class="form">
       <p id="heading">Login</p>
       <div class="field">
@@ -24,6 +20,9 @@
       <button (click)="login(usuario, clave)" class="button1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
       <button class="button2">Sign Up</button>
       </div>
+      <ion-text color="danger" *ngIf="loginFailed">
+        Usuario o clave incorrectos.
+      </ion-text>
       <button [routerLink]="['/recuperar-pass']" class="button3">Forgot Password</button>
   </form>
 

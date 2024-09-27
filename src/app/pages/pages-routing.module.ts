@@ -8,6 +8,8 @@ import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AsignaturaComponent } from './asignatura/asignatura.component';
+import { GeneradorComponent } from './generador/generador.component';
+import { ScannerComponent } from './scanner/scanner.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -19,6 +21,8 @@ const routes: Routes = [
   { path: 'docente', component: DocenteComponent},
   { path: 'alumno', component: AlumnoComponent},
   { path: 'asignatura', component: AsignaturaComponent},
+  { path: 'generador', component: GeneradorComponent},
+  { path: 'scanner', component: ScannerComponent},
 ];
 
 @NgModule({
