@@ -10,6 +10,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AsignaturaComponent } from './asignatura/asignatura.component';
 import { GeneradorComponent } from './generador/generador.component';
 import { ScannerComponent } from './scanner/scanner.component';
+import { RegistrarComponent } from './registrar/registrar.component'; // Importa el componente
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'asignatura', component: AsignaturaComponent},
   { path: 'generador', component: GeneradorComponent},
   { path: 'scanner', component: ScannerComponent},
+  { path: 'registrar', component: RegistrarComponent },  // Agrega la ruta para Registrar
 ];
 
 @NgModule({

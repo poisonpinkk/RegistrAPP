@@ -18,6 +18,10 @@ import { AsignaturaComponent } from './asignatura/asignatura.component';
 import { GeneradorComponent } from './generador/generador.component';
 import { ScannerComponent } from './scanner/scanner.component';
 
+import { RegistrarComponent } from './registrar/registrar.component';
+import { HttpClientModule } from '@angular/common/http';  // Importa HttpClientModule
+
+
 
 @NgModule({
   declarations: [
@@ -31,13 +35,15 @@ import { ScannerComponent } from './scanner/scanner.component';
     AsignaturaComponent,
     GeneradorComponent,
     ScannerComponent,
+    RegistrarComponent,
   ],
   imports: [
     CommonModule,
     PagesRoutingModule,
     SharedModule,
     IonicModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule  // Asegúrate de importar HttpClientModule aquí
   ]
 })
 export class PagesModule { }

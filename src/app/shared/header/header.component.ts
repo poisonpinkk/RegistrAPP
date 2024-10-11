@@ -1,31 +1,33 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicio/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent  implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit {
 
-  usuario: string = ''; // Campo para almacenar el nombre del usuario
-  private authService = inject(AuthService);
+  usuario: string = '';  // Definimos la propiedad usuario
+  private subscriptionAuthService: Subscription | undefined;
 
-  subscriptionAuthService: Subscription = new Subscription;
-
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.subscriptionAuthService = this.authService.usuario$.subscribe(usuario => {
-      //@ts-ignore
-      this.usuario = usuario
-      console.log('Header:', usuario);
+    // Suscribimos al usuario actual desde AuthService
+    this.subscriptionAuthService = this.authService.currentUser$.subscribe(user => {
+      if (user) {
+        this.usuario = user.username;  // Asigna el username del usuario
+      } else {
+        this.usuario = '';  // Si no hay usuario, vacía la variable
+      }
     });
   }
 
-  ngOnDestroy() { // Desuscribirse del observable del nombre del usuario
-    this.subscriptionAuthService?.unsubscribe(); // Desuscribirse del observable del estado de autenticación
+  ngOnDestroy() {
+    if (this.subscriptionAuthService) {
+      this.subscriptionAuthService.unsubscribe();
+    }
   }
-
 }

@@ -16,16 +16,13 @@ export class AsignaturaComponent  implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.subscriptionAuthService = this.authService.usuario$.subscribe(usuario => {
-      //@ts-ignore
-      this.usuario = usuario
-      console.log('Header:', usuario);
-    });
+
   }
 
   ngOnDestroy() { // Desuscribirse del observable del nombre del usuario
-    this.subscriptionAuthService?.unsubscribe(); // Desuscribirse del observable del estado de autenticación
+    if (this.subscriptionAuthService) {
+      this.subscriptionAuthService.unsubscribe();
+    }
   }
-
 
 }

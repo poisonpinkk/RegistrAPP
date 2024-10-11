@@ -1,52 +1,45 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
-
+  private apiUrl = 'https://6702d65abd7c8c1ccd3ffe2d.mockapi.io/usuarios';  // URL de la API
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
-  private usuarioSubject = new BehaviorSubject<string>('');
-  usuario$ = this.usuarioSubject.asObservable();
+  private currentUserSubject = new BehaviorSubject<any>(null);  // Para almacenar el usuario actual
+  currentUser$ = this.currentUserSubject.asObservable();
 
-  private loginFailedSubject = new BehaviorSubject<boolean>(false);
-  loginFailed$ = this.loginFailedSubject.asObservable();
+  constructor(private http: HttpClient) {}
 
-  buscarBD(usuario: string, clave: string){
-    if (usuario === 'profesor' && clave === 'profesor'){
-      this.isAuthenticatedSubject.next(true);
-      this.usuarioSubject.next(usuario);
-      this.loginFailedSubject.next(false);
-    }
-    else if (usuario === 'alumno' && clave === 'alumno'){
-      this.isAuthenticatedSubject.next(true);
-      this.usuarioSubject.next(usuario);
-      this.loginFailedSubject.next(false);
-    }
-    else {
-      this.isAuthenticatedSubject.next(false);
-      this.loginFailedSubject.next(true);
-    }
+  // Método para buscar el usuario en la API
+  buscarBD(usuario: string, clave: string): Observable<boolean> {
+    return this.http.get<any[]>(`${this.apiUrl}?username=${usuario}&password=${clave}`)
+      .pipe(
+        map(users => {
+          if (users.length > 0) {
+            this.isAuthenticatedSubject.next(true);
+            this.currentUserSubject.next(users[0]);  // Almacena el usuario actual
+            return true;
+          } else {
+            this.isAuthenticatedSubject.next(false);
+            return false;
+          }
+        })
+      );
   }
 
   logout(): void {
-    this.usuarioSubject.next('');
     this.isAuthenticatedSubject.next(false);
-    this.loginFailedSubject.next(false);
+    this.currentUserSubject.next(null);  // Resetea el usuario actual
   }
 
-  isLoggedIn(){
-    return this.isAuthenticated$;
+  getCurrentUser() {
+    return this.currentUserSubject.getValue();
   }
-
 }
-
-
-
-
