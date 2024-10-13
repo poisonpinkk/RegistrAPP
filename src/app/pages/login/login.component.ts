@@ -23,10 +23,13 @@ export class LoginComponent implements OnInit {
   login(usuario: string, clave: string): void {
     this.authService.buscarBD(usuario, clave).subscribe(isAuthenticated => {
       if (isAuthenticated) {
-        if (usuario === 'docente') {
-          this.router.navigate(['/docente']);
+        const user = this.authService.getCurrentUser();  // Obtenemos el usuario actual
+        if (user.rol === 'docente') {
+          this.router.navigate(['/docente']);  // Redirige al componente de docente
+        } else if (user.rol === 'alumno') {
+          this.router.navigate(['/alumno']);  // Redirige al componente de alumno
         } else {
-          this.router.navigate(['/alumno']);
+          this.router.navigate(['/login']);  // Si no tiene rol válido, regresa al login
         }
       } else {
         this.loginFailed = true;
