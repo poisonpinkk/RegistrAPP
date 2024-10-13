@@ -25,6 +25,9 @@
         <ion-select-option value="alumno">Alumno</ion-select-option>
       </ion-select>
     </ion-item>
+
+    <ion-text color="danger" *ngIf="mensajeError">{{ mensajeError }}</ion-text>
+
     <ion-button expand="full" type="submit">Registrar</ion-button>
   </form>
 </ion-content>
