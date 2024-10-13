@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AlertController } from '@ionic/angular';  // Importamos AlertController
 
 // Interfaz para los usuarios
 interface Usuario {
@@ -31,7 +32,7 @@ export class RegistrarComponent implements OnInit {
   apiUrl = 'https://6702d65abd7c8c1ccd3ffe2d.mockapi.io/usuarios';  
   mensajeError: string = '';  
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private alertController: AlertController) { }
 
   ngOnInit() {}
 
@@ -43,23 +44,35 @@ export class RegistrarComponent implements OnInit {
       );
   }
 
+  // Método para mostrar un alert en caso de error
+  async mostrarAlerta(mensaje: string) {
+    const alert = await this.alertController.create({
+      header: 'Registro fallido',
+      message: mensaje,
+      buttons: ['OK']
+    });
+
+    await alert.present();  // Muestra el alert
+  }
+
+
   onSubmit() {
     if (this.usuario.username && this.usuario.password && this.usuario.mail && this.usuario.rol) {
       this.verificarUsuarioOMailExistente().subscribe(usuarioExistente => {
         if (usuarioExistente) {
-          this.mensajeError = 'El nombre de usuario o correo ya están registrados. Intente con otros.';
+          this.mostrarAlerta('El username o mail ya están registrados, intente nuevamente.');
         } else {
           this.http.post(this.apiUrl, this.usuario).subscribe(response => {
             console.log('Usuario registrado:', response);
-            this.router.navigate(['/login']);  // Redirige al login
+            this.router.navigate(['/login']);  
           }, error => {
             console.error('Error al registrar el usuario:', error);
-            this.mensajeError = 'Ocurrió un error al registrar el usuario.';
+            this.mostrarAlerta('Ocurrió un error al registrar el usuario.');
           });
         }
       });
     } else {
-      this.mensajeError = 'Por favor, complete todos los campos.';
+      this.mostrarAlerta('Por favor, complete todos los campos.');
     }
   }
 }
