@@ -24,6 +24,8 @@ export class LoginComponent implements OnInit {
     this.authService.buscarBD(usuario, clave).subscribe(isAuthenticated => {
       if (isAuthenticated) {
         const user = this.authService.getCurrentUser();  // Obtenemos el usuario actual
+        this.usuario='';
+        this.clave='';
         if (user.rol === 'docente') {
           this.router.navigate(['/docente']);  // Redirige al componente de docente
         } else if (user.rol === 'alumno') {

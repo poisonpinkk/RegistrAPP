@@ -43,7 +43,8 @@ import { HttpClientModule } from '@angular/common/http';  // Importa HttpClientM
     SharedModule,
     IonicModule,
     FormsModule,
-    HttpClientModule  // Asegúrate de importar HttpClientModule aquí
+    HttpClientModule,
+    // Asegúrate de importar HttpClientModule aquí
   ]
 })
 export class PagesModule { }

@@ -7,34 +7,13 @@
   <app-header></app-header>
 
   <ion-list>
-    <ion-item>
-      <ion-label>Asignatura 1</ion-label>
-
-      <ion-button [routerLink]="['/generador']">Generar QR</ion-button>
-
-    </ion-item>
-    <ion-item>
-      <ion-label>Asignatura 2</ion-label>
-
-      <ion-button [routerLink]="['/generador']">Generar QR</ion-button>
-
-    </ion-item>
-    <ion-item>
-      <ion-label>Asignatura 3</ion-label>
-
-      <ion-button [routerLink]="['/generador']">Generar QR</ion-button>
-
-    </ion-item>
-    <ion-item>
-      <ion-label>Asignatura 4</ion-label>
-
-      <ion-button [routerLink]="['/generador']">Generar QR</ion-button>
-
-    </ion-item>
-    <ion-item>
-      <ion-label>Asignatura 5</ion-label>
-
-      <ion-button [routerLink]="['/generador']">Generar QR</ion-button>
+    <ion-item *ngFor="let asignatura of asignaturas">
+      <div class="asignatura-container">
+        <div class="asignatura-nombre">
+          {{ asignatura.nombre}} - {{asignatura.id}}
+        </div>
+      </div>
+      <ion-button fill="outline" size="small"(click)="generarQR(asignatura.id)">Generar Qr</ion-button>
 
     </ion-item>
   </ion-list>

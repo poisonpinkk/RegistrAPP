@@ -11,6 +11,7 @@
   display: flex;
   justify-content: center; /* Centra la imagen horizontalmente */
   align-items: center; /* Centra la imagen verticalmente */
+  margin-top: 50px;
 }
 ion-content {
   --background: none; /* Elimina el fondo predeterminado de Ionic */
