@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http'; 
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -21,7 +21,7 @@ interface Usuario {
 })
 export class RegistrarComponent implements OnInit {
 
-  usuario: Usuario = {  
+  usuario: Usuario = {
     id: '',
     username: '',
     password: '',
@@ -29,8 +29,8 @@ export class RegistrarComponent implements OnInit {
     rol: ''
   };
 
-  apiUrl = 'https://6702d65abd7c8c1ccd3ffe2d.mockapi.io/usuarios';  
-  mensajeError: string = '';  
+  apiUrl = 'https://6702d65abd7c8c1ccd3ffe2d.mockapi.io/usuarios';
+  mensajeError: string = '';
 
   constructor(private http: HttpClient, private router: Router, private alertController: AlertController) { }
 
@@ -67,9 +67,9 @@ export class RegistrarComponent implements OnInit {
         if (usuarioExistente) {
           this.mostrarAlerta('El username o mail ya están registrados, intente nuevamente.');
         } else {
-          this.http.post(this.apiUrl, this.usuario).subscribe(response => {
+          this.http.post(this.apiUrl, this.usuario).subscribe(response => {  //Aqui esta el metodo post
             console.log('Usuario registrado:', response);
-            this.router.navigate(['/login']);  
+            this.router.navigate(['/login']);
           }, error => {
             console.error('Error al registrar el usuario:', error);
             this.mostrarAlerta('Ocurrió un error al registrar el usuario.');

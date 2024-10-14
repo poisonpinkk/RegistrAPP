@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/servicio/auth.service';
 export class AsignaturaComponent  implements OnInit {
 
   usuario: string = ''; // Campo para almacenar el nombre del usuario
+  rol: string = ''; // Campo para almacenar el rol del usuario
   private authService = inject(AuthService);
 
   subscriptionAuthService: Subscription = new Subscription;

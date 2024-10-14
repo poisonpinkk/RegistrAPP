@@ -17,13 +17,13 @@
         <ion-input [(ngModel)]="clave" name="clave" placeholder="Password" class="input-field" type="password"></ion-input>
       </div>
       <div class="btn">
-      <button (click)="login(usuario, clave)" class="button1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-      <button class="button2">Sign Up</button>
+      <button (click)="login(usuario, clave)" class="button1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iniciar Sesión&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+      <button [routerLink]="['/registrar']" class="button2">Registrate</button>
       </div>
       <ion-text color="danger" *ngIf="loginFailed">
         Usuario o clave incorrectos.
       </ion-text>
-      <button [routerLink]="['/recuperar-pass']" class="button3">Forgot Password</button>
+      <button [routerLink]="['/recuperar-pass']" class="button3">Recuperar Contraseña</button>
   </form>
 
 </ion-content>

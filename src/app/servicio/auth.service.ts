@@ -9,8 +9,8 @@ import { map } from 'rxjs/operators';
 export class AuthService {
 
   private apiUrl = 'https://6702d65abd7c8c1ccd3ffe2d.mockapi.io/usuarios';  // URL de la API
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false); // se declara en false por que el usuario no ha iniciado sesion 
-  isAuthenticated$ = this.isAuthenticatedSubject.asObservable();  
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false); // se declara en false por que el usuario no ha iniciado sesion
+  isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
   private currentUserSubject = new BehaviorSubject<any>(null);  // Para almacenar el usuario actual
   currentUser$ = this.currentUserSubject.asObservable();       //Expone el usuario actual como un Observable que otros componentes pueden suscribirse
