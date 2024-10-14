@@ -36,11 +36,16 @@ export class RegistrarComponent implements OnInit {
 
   ngOnInit() {}
 
-  // Verifica si el usuario o correo ya existen en la API usando Observable
   verificarUsuarioOMailExistente(): Observable<boolean> {
-    return this.http.get<Usuario[]>(`${this.apiUrl}?username=${this.usuario.username}&mail=${this.usuario.mail}`)
+    return this.http.get<Usuario[]>(this.apiUrl)  // Obtiene todos los usuarios
       .pipe(
-        map((usuarios: Usuario[]) => usuarios.length > 0)  // Mapea la respuesta al valor booleano
+        map((usuarios: Usuario[]) => {
+          // Verifica si el username o correo ya existen
+          const usuarioExistente = usuarios.some(
+            u => u.username === this.usuario.username || u.mail === this.usuario.mail
+          );
+          return usuarioExistente;
+        })
       );
   }
 
