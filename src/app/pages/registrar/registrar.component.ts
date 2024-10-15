@@ -48,6 +48,22 @@ export class RegistrarComponent implements OnInit {
         })
       );
   }
+  async mostrarAlertaExito() {
+    const alert = await this.alertController.create({
+      header: '¡Registro exitoso!',
+      message: 'Te has registrado con éxito.',
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.router.navigate(['/login']); // Redirige al login al hacer clic en OK
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
+  }
 
   // Método para mostrar un alert en caso de error
   async mostrarAlerta(mensaje: string) {
@@ -67,9 +83,9 @@ export class RegistrarComponent implements OnInit {
         if (usuarioExistente) {
           this.mostrarAlerta('El username o mail ya están registrados, intente nuevamente.');
         } else {
-          this.http.post(this.apiUrl, this.usuario).subscribe(response => {  //Aqui esta el metodo post
+          this.http.post(this.apiUrl, this.usuario).subscribe(response => {
             console.log('Usuario registrado:', response);
-            this.router.navigate(['/login']);
+            this.mostrarAlertaExito(); // Llamar al alert de éxito
           }, error => {
             console.error('Error al registrar el usuario:', error);
             this.mostrarAlerta('Ocurrió un error al registrar el usuario.');

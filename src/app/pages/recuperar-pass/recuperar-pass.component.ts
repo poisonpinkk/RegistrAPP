@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-recuperar-pass',
   templateUrl: './recuperar-pass.component.html',
