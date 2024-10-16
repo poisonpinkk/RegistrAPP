@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Location } from '@angular/common';
 import { AlertController } from '@ionic/angular';  // Importamos AlertController
 
 // Interfaz para los usuarios
@@ -61,7 +62,7 @@ export class RegistrarComponent implements OnInit {
         }
       ]
     });
-  
+
     await alert.present();
   }
 
