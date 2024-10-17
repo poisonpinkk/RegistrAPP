@@ -6,14 +6,14 @@
 
   <app-header></app-header>
 
-  <ion-list>
+  <ion-list class="list">
     <ion-item *ngFor="let asignatura of asignaturas">
       <div class="asignatura-container">
         <div class="asignatura-nombre">
           {{ asignatura.nombre}} - {{asignatura.id}}
         </div>
       </div>
-      <ion-button fill="outline" size="small"(click)="generarQR(asignatura.id)">Generar Qr</ion-button>
+      <ion-button  class="qrbutton" fill="outline" size="small"(click)="generarQR(asignatura.id)">Generar Qr</ion-button>
 
     </ion-item>
   </ion-list>

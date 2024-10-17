@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http'; //importar para obtener los datos de la api
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -9,17 +9,17 @@ import { map } from 'rxjs/operators';
 export class AuthService {
 
   private apiUrl = 'https://6702d65abd7c8c1ccd3ffe2d.mockapi.io/usuarios';  // URL de la API
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false); // Inicialmente en false
-  isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false); // Inicialmente en false ya que el usuario no esta inicializado
+  isAuthenticated$ = this.isAuthenticatedSubject.asObservable();  //expone el estado de autenticacion (true o false) como un observable para que otros componentes puedan reaccionar a los cambios 
 
   private currentUserSubject = new BehaviorSubject<any>(null);  // Almacena el usuario actual
   currentUser$ = this.currentUserSubject.asObservable();       // Expone el usuario actual como un Observable
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}  //inyectamos el servicio httpclient para las solicitudes de la api 
 
   // Método para buscar el usuario en la API y validar la contraseña
   buscarBD(usuario: string, clave: string): Observable<boolean> {
-    return this.http.get<any[]>(`${this.apiUrl}?username=${usuario}`)
+    return this.http.get<any[]>(`${this.apiUrl}?username=${usuario}`) //solicitud get con el parametro username, devuelve una lista de usuarios que coincidan con el nombre proporcionado
       .pipe(
         map(users => {
           if (users.length > 0) {
@@ -42,6 +42,6 @@ export class AuthService {
   }
 
   getCurrentUser() {
-    return this.currentUserSubject.getValue();
+    return this.currentUserSubject.getValue();  //obtiene el valor actual del currentusersubject
   }
 }

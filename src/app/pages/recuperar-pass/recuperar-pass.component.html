@@ -15,7 +15,8 @@
         <ion-input type="email" placeholder="email@dominio.com"></ion-input>
       </ion-item>
 
-      <ion-button expand="block" class="submit-button">Enviar Enlace</ion-button>
+      <!-- Vinculamos el método enviarEnlace al botón -->
+      <ion-button expand="block" class="submit-button" (click)="enviarEnlace()">Enviar Enlace</ion-button>
 
       <div class="back-to-login">
         <ion-text>¿Ya tienes cuenta?</ion-text>

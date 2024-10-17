@@ -4,14 +4,14 @@
   <br><br>
   <form class="form">
     <p id="heading">Login</p>
-    <div class="field">
+    <div class="field">   <!--ngmodel vincula el valor del input a la variable usuario-->
       <ion-input [(ngModel)]="usuario" name="usuario" autocomplete="off" placeholder="Username" class="input-field" type="text"></ion-input>
     </div>
     <div class="field">
       <ion-input [(ngModel)]="clave" name="clave" placeholder="Password" class="input-field" type="password"></ion-input>
     </div>
     <div class="btn">
-      <button (click)="login(usuario, clave)" class="button1">Iniciar Sesión</button>
+      <button (click)="login(usuario, clave)" class="button1">Iniciar Sesión</button> <!--rvrnto click asociado al metodo login, le pasa el nombre y contraseña ingresados-->
       <button [routerLink]="['/registrar']" class="button2">Registrate</button>
     </div>
     
