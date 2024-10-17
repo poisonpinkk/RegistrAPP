@@ -1,6 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicio/auth.service';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs'; // Importamos 'of' para manejar errores
 
 @Component({
   selector: 'app-login',
@@ -19,13 +21,19 @@ export class LoginComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
   login(usuario: string, clave: string): void {
-    this.authService.buscarBD(usuario, clave).subscribe(isAuthenticated => {
+    this.authService.buscarBD(usuario, clave).pipe(
+      catchError(error => {
+        console.error('Error de autenticación', error);
+        this.loginFailed = true;  // Mostramos mensaje de error si hay fallo en la autenticación
+        return of(false);  // Retornamos false para mantener el flujo
+      })
+    ).subscribe(isAuthenticated => {
       if (isAuthenticated) {
         const user = this.authService.getCurrentUser();  // Obtenemos el usuario actual
-        this.usuario='';
-        this.clave='';
+        this.usuario = '';
+        this.clave = '';
+        this.loginFailed = false;  // Reseteamos el error si el login es exitoso
         if (user.rol === 'docente') {
           this.router.navigate(['/docente']);  // Redirige al componente de docente
         } else if (user.rol === 'alumno') {
@@ -34,7 +42,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/login']);  // Si no tiene rol válido, regresa al login
         }
       } else {
-        this.loginFailed = true;
+        this.loginFailed = true;  // Si no está autenticado, mostramos error
       }
     });
   }

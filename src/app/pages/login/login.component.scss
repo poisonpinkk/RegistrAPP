@@ -112,3 +112,12 @@ ion-content {
   --background: none; /* Elimina el fondo predeterminado de Ionic */
   background: linear-gradient(180deg, #ffffff, #0043c0); /* Degradado de coral a azul */
 }
+
+.error-message {
+  color:#ffffff;
+  display: flex;
+  justify-content: center;  
+  align-items: center;      
+  text-align: center;       
+  margin-top: 20px;         
+}

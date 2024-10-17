@@ -97,4 +97,8 @@ export class RegistrarComponent implements OnInit {
       this.mostrarAlerta('Por favor, complete todos los campos.');
     }
   }
+
+  atras() {                    //para volver atras es un metodo
+    this.router.navigate(['/home']);;
+  }
 }
